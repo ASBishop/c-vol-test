@@ -6,8 +6,11 @@ LABEL description="Red Hat OpenStack Platform 12.0 cinder-volume (abishop)" \
 
 USER root
 
-RUN yum repolist
+
+RUN yum-config-manager --disable \* --enable rhel-7-server-openstack-12-rpms
+RUN yum list available
+
 # RUN yum-config-manager --enable rhel-7-server-rpms
-RUN yum install -y tmux
+# RUN yum install -y tmux
 
 USER cinder
