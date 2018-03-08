@@ -6,8 +6,9 @@ LABEL description="Red Hat OpenStack Platform 12.0 cinder-volume (abishop)" \
 
 USER root
 
-
-RUN yum-config-manager --disable \* --enable rhel-7-server-openstack-12-rpms
+RUN yum repolist all
+RUN yum -config-manager --disable rhel-7-server-rpms
+RUN yum -config-manager --enable rhel-7-server-openstack-12-rpms
 RUN yum list available
 
 # RUN yum-config-manager --enable rhel-7-server-rpms
