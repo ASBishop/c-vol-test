@@ -6,11 +6,14 @@ LABEL description="Red Hat OpenStack Platform 12.0 cinder-volume VendorX PluginY
 
 USER root
 
-RUN yum repolist enabled
-#RUN yum-config-manager --disable rhel-7-server-rpms
-#RUN yum-config-manager --enable rhel-7-server-rhceph-2-tools-rpms
+# Enable a repo to install a package
+RUN yum clean all
+RUN yum-config-manager --enable rhel-7-server-openstack-12-rpms
+RUN yum install -y openstack-nova-novncproxy
+RUN yum-config-manager --disable rhel-7-server-openstack-12-rpms
 
-#RUN yum-config-manager --enable rhel-7-server-openstack-12-rpms
-#RUN yum install -y openstack-nova-novncproxy
+# Add required license info
+RUN mkdir /licenses
+COPY licensing.txt /licenses
 
 USER cinder
